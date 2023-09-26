@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const Model = sequelize.define("model", {
     time: {
-      type: Sequelize.DATETIME
+      type: Sequelize.DATE
     },
     coffee: {
       type: Sequelize.STRING
