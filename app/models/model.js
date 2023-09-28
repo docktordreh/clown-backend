@@ -1,7 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
   const Model = sequelize.define("model", {
-    time: {
-      type: Sequelize.DATE
+    id: {
+      type: Sequelize.UUID,
+      primaryKey: true,
+      defaultValue: Sequelize.UUIDV4
     },
     coffee: {
       type: Sequelize.STRING
