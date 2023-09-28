@@ -1,5 +1,5 @@
 const db = require("../models");
-const Model = db.model;
+const Rating = db.rating;
 const Op = db.sequelize.Op;
 exports.create = (req, res) => {
   let fields = ["coffee", "grinder", "grindsetting", "amtbeans", "brewingtime", "weightres", "taste", "time"];
@@ -8,9 +8,9 @@ exports.create = (req, res) => {
     hasContent = value ? true && fields.includes(key) : hasContent;
   }
   if (!hasContent) {
-    res.status(500).send({message: `Invalid arguments passed. Valid: ${fields} `})
+    res.status(400).send({message: `Invalid arguments passed. Valid: ${fields} `})
   }
-  const model = {
+  const rating = {
     createdAt: req.body.time,
     coffee: req.body.coffee,
     grinder: req.body.grinder,
@@ -20,8 +20,8 @@ exports.create = (req, res) => {
     weightres: req.body.weightres,
     taste: req.body.taste
   };
-  Model.create(model).then(data => {res.send(data);}).catch(err => {
-    res.status(500).send({message: err.message || "Error while creating the Model."});
+  Rating.create(rating).then(data => {res.send(data);}).catch(err => {
+    res.status(500).send({message: "Error while creating the Rating."});
   });
 };
 exports.findAll = (req, res) => {

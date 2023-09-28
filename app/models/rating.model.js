@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Model = sequelize.define("model", {
+  const Rating = sequelize.define("rating", {
     id: {
       type: Sequelize.UUID,
       primaryKey: true,
@@ -27,5 +27,5 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
   });
-  return Model;
+  return Rating;
 }
