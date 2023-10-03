@@ -1,6 +1,7 @@
 const db = require("../models");
 const Rating = db.rating;
 const Op = db.sequelize.Op;
+
 exports.create = (req, res) => {
   let fields = ["coffee", "grinder", "grindsetting", "amtbeans", "brewingtime", "weightres", "taste", "time"];
   let hasContent = false;
