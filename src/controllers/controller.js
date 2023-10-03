@@ -20,26 +20,40 @@ exports.create = (req, res) => {
     brewingtime: req.body.brewingtime,
     weightres: req.body.weightres,
     taste: req.body.taste
-  };
-  Rating.create(rating).then(data => {res.send(data);}).catch(err => {
-    res.status(500).send({message: "Error while creating the Rating."});
-  });
-};
+  }
+  Rating.create(rating).then(data => { res.send(data) }).catch(err => {
+    console.log(err)
+    res.status(500).send({ message: 'Error while creating the Rating.' })
+  })
+}
 exports.findAll = (req, res) => {
 
-};
+}
 exports.findOne = (req, res) => {
+  const id = req.params.id
+  Rating.findByPk(id)
+        .then(data => {
+          if (data) {
+            res.send(data)
+            return
+          }
+          res.status(404).send({ message: `Can't find rating with id ${id}` })
+        })
+        .catch( err => {
+          console.log(err)
+          res.status(500).send({ message: 'Error retrieving Rating' })
+        })
 
-};
+}
 exports.update = (req, res) => {
 
-};
+}
 exports.delete = (req, res) => {
 
-};
+}
 exports.deleteAll = (req, res) => {
 
-};
+}
 exports.findAllPublished = (req, res) => {
 
-};
+}
