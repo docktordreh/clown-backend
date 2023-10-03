@@ -1,15 +1,15 @@
-const db = require("../models");
-const Rating = db.rating;
-const Op = db.sequelize.Op;
+const db = require('../models')
+const Rating = db.rating
+const Op = db.sequelize.Op
 
 exports.create = (req, res) => {
-  let fields = ["coffee", "grinder", "grindsetting", "amtbeans", "brewingtime", "weightres", "taste", "time"];
-  let hasContent = false;
-  for ( let [key, value] of Object.entries(req.body)) {
-    hasContent = value ? true && fields.includes(key) : hasContent;
+  const fields = ['coffee', 'grinder', 'grindsetting', 'amtbeans', 'brewingtime', 'weightres', 'taste', 'time']
+  let hasContent = false
+  for (const [key, value] of Object.entries(req.body)) {
+    hasContent = value ? fields.includes(key) : hasContent
   }
   if (!hasContent) {
-    res.status(400).send({message: `Invalid arguments passed. Valid: ${fields} `})
+    res.status(400).send({ message: `Invalid arguments passed. Valid: ${fields}` })
   }
   const rating = {
     createdAt: req.body.time,
