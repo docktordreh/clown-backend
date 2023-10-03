@@ -35,5 +35,17 @@ describe('Test /api', () => {
           done(err)
         })
     })
+    it('Load all ratings (there should be one)', () => {
+      request(server)
+        .get('/api/rating')
+        .expect(200)
+        .end((err, response) => {
+          console.log(response.body)
+          expect(response.body.length).to.equal(1)
+          expect(response.body[0].id).to.equal(id)
+          console.log(err)
+          done(err)
+        })
+    })
   })
 })

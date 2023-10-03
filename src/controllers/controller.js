@@ -27,7 +27,18 @@ exports.create = (req, res) => {
   })
 }
 exports.findAll = (req, res) => {
-
+  Rating.findAll()
+        .then(data => {
+          if (data) {
+            res.send(data)
+            return
+          }
+          res.status(404).send({ message: 'No ratings found' })
+        })
+        .catch(err => {
+          console.log(err)
+          res.status(500).send({ message: 'An error occured while loading ratings' })
+        })
 }
 exports.findOne = (req, res) => {
   const id = req.params.id
@@ -43,7 +54,6 @@ exports.findOne = (req, res) => {
           console.log(err)
           res.status(500).send({ message: 'Error retrieving Rating' })
         })
-
 }
 exports.update = (req, res) => {
 
