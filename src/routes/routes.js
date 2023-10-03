@@ -8,6 +8,6 @@ module.exports = app => {
   router.put("/:id", model.update);
   router.delete("/:id", model.delete);
   router.delete("/", model.deleteAll);
-  app.use("/api/model", router);
+  app.use("/api/rating", router);
 
 }
