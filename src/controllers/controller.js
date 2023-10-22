@@ -56,7 +56,24 @@ exports.findOne = (req, res) => {
         })
 }
 exports.update = (req, res) => {
-
+  const id = req.params.id
+  console.log(req)
+  // console.log(`update body is ${req.body}`)
+  Rating.update(req.body,
+                { where: { id } }
+               )
+        .then(result => {
+          Rating.findByPk(id).then(data => {
+            if (data) {
+              res.send(data)
+              return
+            }
+            res.status(404).send({ message: 'Could not update non-existing entry' })
+          })
+        }).catch(err => {
+          res.status(500).send({ message: `Error updating rating with id ${id}` })
+          console.log(err)
+        })
 }
 exports.delete = (req, res) => {
 

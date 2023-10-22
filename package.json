@@ -4,7 +4,11 @@
   "description": "Backend Service serving access to a CLOWN database",
   "main": "server.js",
   "scripts": {
-    "test": "docker compose up -d && sleep 5 && mocha ./src/tests/*.spec.js --exit"
+    "test": "cross-env NODE_ENV=test mocha ./src/tests/*.spec.js --exit",
+    "db:down": "docker compose down",
+    "db:create": "docker compose up -d && sleep 10 && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "db:reset": "npm run db:down && npm run db:create",
+    "pretest": "cross-env NODE_ENV=test npm run db:reset"
   },
   "repository": {
     "type": "git",
@@ -28,12 +32,15 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mysql2": "^3.6.1",
     "sequelize": "^6.33.0"
   },
   "devDependencies": {
+    "async": "^3.2.4",
     "chai": "^4.3.10",
+    "cross-env": "^7.0.3",
     "eslint": "^8.50.0",
     "eslint-config-prettier-standard": "^4.0.1",
     "eslint-config-standard": "^17.1.0",
@@ -43,6 +50,7 @@
     "eslint-plugin-vue": "^9.17.0",
     "mocha": "^10.2.0",
     "rewire": "^7.0.0",
+    "sequelize-cli": "^6.6.1",
     "sinon": "^16.0.0",
     "sinon-chai": "^3.7.0",
     "supertest": "^6.3.3"
